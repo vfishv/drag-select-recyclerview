@@ -2,7 +2,7 @@ if (!project.rootProject.file("local.properties").exists()) {
   logger.warn("local.properties not found. Skipping Bintray Release setup.")
   return
 }
-apply plugin: "com.novoda.bintray-release"
+//apply plugin: "com.novoda.bintray-release"
 
 def getBintrayUserAndKey() {
   Properties properties = new Properties()
@@ -28,7 +28,7 @@ task checkBintrayConfig {
     }
   }
 }
-
+/*
 afterEvaluate {
   bintrayUpload.dependsOn checkBintrayConfig
 }
@@ -45,3 +45,4 @@ publish {
   website = "https://github.com/afollestad/drag-select-recyclerview"
   dryRun = false
 }
+*/
