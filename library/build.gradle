@@ -1,9 +1,50 @@
+apply plugin: "com.android.library"
 ext.module_group = "com.afollestad"
 ext.module_name = "drag-select-recyclerview"
 
-apply from: rootProject.file("gradle/android_library_config.gradle")
+
+apply plugin: "kotlin-android"
+apply from: rootProject.file("dependencies.gradle")
+//apply from: rootProject.file("gradle/spotless_plugin_config.gradle")
+
+android {
+  compileSdkVersion versions.compile_sdk
+  //buildToolsVersion versions.build_tools
+  namespace "com.afollestad.dragselectrecyclerview"
+/*
+  compileOptions {
+    sourceCompatibility 1.8
+    targetCompatibility 1.8
+  }
+*/
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+  }
+  kotlinOptions {
+    jvmTarget = '17'
+  }
+
+  defaultConfig {
+    minSdkVersion versions.min_sdk
+    targetSdkVersion versions.compile_sdk
+    versionCode versions.publish_version_code
+    versionName versions.publish_version
+  }
+
+  sourceSets {
+    main.res.srcDirs = [
+            "src/main/res",
+            "src/main/res-public"
+    ]
+  }
+
+  packagingOptions {
+    pickFirst 'META-INF/proguard/androidx-annotations.pro'
+  }
+}
 
 dependencies {
-  api deps.androidx.recycler_view
+  implementation 'androidx.recyclerview:recyclerview:1.3.2'
   implementation deps.kotlin.stdlib8
 }

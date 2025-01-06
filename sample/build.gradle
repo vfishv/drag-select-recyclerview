@@ -1,7 +1,50 @@
+apply plugin: "com.android.application"
+apply plugin: "kotlin-android"
+apply from: rootProject.file("dependencies.gradle")
+
 ext.module_group = "com.afollestad"
 ext.module_name = "dragselectrecyclerviewsample"
 
-apply from: rootProject.file("gradle/android_application_config.gradle")
+//apply from: rootProject.file("gradle/spotless_plugin_config.gradle")
+
+android {
+  compileSdkVersion versions.compile_sdk
+  //buildToolsVersion versions.build_tools
+  namespace "com.afollestad.dragselectrecyclerviewsample"
+/*
+  compileOptions {
+    sourceCompatibility 1.8
+    targetCompatibility 1.8
+  }
+*/
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+  }
+  kotlinOptions {
+    jvmTarget = '17'
+  }
+
+  defaultConfig {
+    minSdkVersion versions.min_sdk
+    targetSdkVersion versions.compile_sdk
+    versionCode versions.publish_version_code
+    versionName versions.publish_version
+  }
+
+  sourceSets {
+    main.res.srcDirs = [
+            "src/main/res",
+            "src/main/res-public"
+    ]
+  }
+
+  packagingOptions {
+    pickFirst 'META-INF/proguard/androidx-annotations.pro'
+  }
+}
+
 
 dependencies {
   implementation project(":library")
